@@ -1,2 +1,3 @@
-__pycache__/
+./movie_heaven_bar/__pycache__/
+./movie_heaven_bar/spiders/__pycache__/
 ./movie_heaven_bar/settings.py.prod
