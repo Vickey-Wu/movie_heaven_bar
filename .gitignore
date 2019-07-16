@@ -1,1 +1,2 @@
-./movie_heaven_bar/__pycache__/
+__pycache__/
+./movie_heaven_bar/settings.py.prod
