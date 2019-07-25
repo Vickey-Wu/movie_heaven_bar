@@ -19,16 +19,34 @@ NEWSPIDER_MODULE = 'movie_heaven_bar.spiders'
 #USER_AGENT = 'movie_heaven_bar (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = False
+#ROBOTSTXT_OBEY = False
+ROBOTSTXT_OBEY = True
 
-# db settings
-DB_SETTINGS = {
-            'DB_HOST': '192.168.229.128',
-            'DB_PORT': 8886,
-            'DB_DB': 'movie_heaven_bar',
-            'DB_USER': 'movie',
-            'DB_PASSWD': '123123',
-        }
+# mysql settings
+MYSQL_SETTINGS = {
+                  'DB_HOST': '192.168.229.128',
+                  'DB_PORT': 8886,
+                  'DB_DB': 'movie_heaven_bar',
+                  'DB_USER': 'movie',
+                  'DB_PASSWD': '123123',
+                 }
+
+###### scrapy-redis settings start ######
+# https://github.com/rmax/scrapy-redis
+# Enables scheduling storing requests queue in redis.
+SCHEDULER = "scrapy_redis.scheduler.Scheduler"
+
+# Ensure all spiders share same duplicates filter through redis.
+DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
+
+# Specify the full Redis URL for connecting (optional).
+# If set, this takes precedence over the REDIS_HOST and REDIS_PORT settings.
+REDIS_URL = 'redis://:123123@192.168.229.128:8889'
+
+# Don't cleanup redis queues, allows to pause/resume crawls.
+SCHEDULER_PERSIST = True
+
+###### scrapy-redis settings end ######
 
 # log settings
 LOG_LEVEL = 'INFO'

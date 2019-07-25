@@ -21,3 +21,4 @@ class MovieHeavenBarItem(scrapy.Item):
     movie_publish_date = Field()
     movie_score = Field()
     movie_download_link = Field()
+    movie_hash = Field()
