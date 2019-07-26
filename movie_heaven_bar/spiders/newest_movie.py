@@ -42,10 +42,24 @@ class NewestMovieSpider(scrapy.Spider):
             yield Request(url=url, callback=self.parse_single_page, meta={'item': item}, dont_filter = False)
 
     def parse_single_page(self, response):
+        # 适配不同html结构的电影详情页
+        detail_xpath_list = [
+                                '//*[@id="Zoom"]//p/text()',
+                                '//*[@id="Zoom"]//td/text()',
+                                '//*[@id="read_tpc"]/text()',
+                            ]
         item = response.meta['item']
         item['movie_link'] = response.url
         logging.log(logging.INFO, 'crawling url: ' + item['movie_link'])
-        detail_row = response.xpath('//*[@id="Zoom"]//p/text()').extract()		# str type list
+        # 电影天堂的前端太坑，写了这么多不同结构的html，所以就会导致报错获取不到详细内容，以下对不同html结构适配。 
+        for detail_xpath in detail_xpath_list:
+            detail_row = response.xpath(detail_xpath).extract()		# str type list
+            #logging.log(logging.INFO, f'*************** detail_row: {detail_row} ****************')
+            logging.log(logging.INFO, f'*************** detail_row len: {len(detail_row)} ****************')
+            if len(detail_row) > 4:
+                logging.log(logging.INFO, f'********** movie detail from {detail_xpath} **********')
+                break
+
         # 将网页提取的str列表类型数据转成一个长字符串, 以圆圈为分隔符，精确提取各个字段具体内容
         detail_str = ''.join(detail_row)
         # 将电影详细内容hash，以过滤相同内容
