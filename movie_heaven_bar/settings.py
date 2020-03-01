@@ -24,11 +24,11 @@ ROBOTSTXT_OBEY = True
 
 # mysql settings
 MYSQL_SETTINGS = {
-                  'DB_HOST': '192.168.229.128',
+                  'DB_HOST': 'yourhost',
                   'DB_PORT': 8886,
                   'DB_DB': 'movie_heaven_bar',
                   'DB_USER': 'movie',
-                  'DB_PASSWD': '123123',
+                  'DB_PASSWD': 'yourpasswd',
                  }
 
 ###### scrapy-redis settings start ######
@@ -41,7 +41,7 @@ DUPEFILTER_CLASS = "scrapy_redis.dupefilter.RFPDupeFilter"
 
 # Specify the full Redis URL for connecting (optional).
 # If set, this takes precedence over the REDIS_HOST and REDIS_PORT settings.
-REDIS_URL = 'redis://:123123@192.168.229.128:8889'
+REDIS_URL = 'redis://:yourpasswd@yourhost:8889'
 
 # Don't cleanup redis queues, allows to pause/resume crawls.
 SCHEDULER_PERSIST = True
